@@ -1,0 +1,44 @@
+---
+import "@/styles/global.css";
+import HStack from "@/components/ui/hstack";
+
+import { Image } from "astro:assets";
+import { questions } from "@/mock/questions";
+import Center from "@/components/ui/center";
+import { Quiz } from "@/components/ui/quiz";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <div>
+      <Center>
+        <HStack className={`items-center w-4/5 justify-between`}>
+          {
+            questions.map((question) => (
+              <Quiz
+                client:load
+                question={question.question}
+                options={question.options}
+                correctOption={question.correctOption}
+              />
+            ))
+          }
+          <Image
+            alt={"main"}
+            width={600}
+            height={500}
+            loading="lazy"
+            src={`${import.meta.env.S3_BUCKET}/histquiz-main.svg`}
+          />
+        </HStack>
+      </Center>
+    </div>
+  </body>
+</html>
