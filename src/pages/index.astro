@@ -1,7 +1,7 @@
 ---
 import "@/styles/global.css";
 import HStack from "@/components/ui/hstack";
-
+import { VStack } from "@/components/ui/vstack";
 import { Image } from "astro:assets";
 import { questions } from "@/mock/questions";
 import Center from "@/components/ui/center";
@@ -12,32 +12,44 @@ import { Quiz } from "@/components/ui/quiz";
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>HistQuiz</title>
   </head>
   <body>
     <div>
       <Center>
-        <HStack className={`items-center w-4/5 justify-between`}>
-          {
-            questions.map((question) => (
-              <Quiz
-                client:load
-                question={question.question}
-                options={question.options}
-                correctOption={question.correctOption}
-              />
-            ))
-          }
-          <Image
-            alt={"main"}
-            width={600}
-            height={500}
-            loading="lazy"
-            src={`${import.meta.env.S3_BUCKET}/histquiz-main.svg`}
-          />
-        </HStack>
+        <VStack className="flex items-center justify-center">
+          <h1 class="text-2xl font-semibold absolute top-0 mt-10 w-full">
+            Hist Quiz
+          </h1>
+          <HStack className={`items-center w-4/5 justify-between`}>
+            <Image
+              alt={"main"}
+              width={600}
+              height={500}
+              loading="lazy"
+              class={"max-lg:hidden max-xl:w-2/4 max-xl:h-2/4"}
+              src={`${import.meta.env.S3_BUCKET}/histquiz-main.svg`}
+            />
+            {
+              questions.map((question) => (
+                <Quiz
+                  client:load
+                  question={question.question}
+                  options={question.options}
+                  correctOption={question.correctOption}
+                />
+              ))
+            }
+          </HStack>
+        </VStack>
       </Center>
     </div>
   </body>

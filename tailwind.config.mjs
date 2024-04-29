@@ -13,7 +13,12 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1280px",
+        xl: "1100px",
+        lg: "980px",
+        md: "768px",
+        sm: "557px",
+        xs: "366px",
       },
     },
     extend: {

@@ -5,6 +5,7 @@ import HStack from "./hstack";
 import { useToast } from "./use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { Question } from "./question";
+import { Spinner } from "./spinner";
 
 type QuizProps = {
   question: string;
@@ -14,6 +15,7 @@ type QuizProps = {
 
 const Quiz: React.FC<QuizProps> = ({ question, options, correctOption }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
   const { toast } = useToast();
 
   const handleOptionSelect = (option: string) => {
@@ -21,22 +23,28 @@ const Quiz: React.FC<QuizProps> = ({ question, options, correctOption }) => {
   };
 
   const handleSubmit = () => {
-    if (selectedOption === correctOption) {
-      toast({
-        title: "Acertou!🎊🎊🎊🎉🎉🎉",
-        description: "Muito bem! Vamos para a próxima pergunta!",
-      });
-    } else {
-      toast({
-        title: "Essa não! Resposta incorreta! 😥",
-        description: "Ainda não foi dessa vez..",
-      });
+    if (!isLoading) {
+      setIsLoading(true);
+      setTimeout(() => {
+        if (selectedOption === correctOption) {
+          toast({
+            title: "Acertou!🎊🎊🎊🎉🎉🎉",
+            description: "Muito bem! Vamos para a próxima pergunta!",
+          });
+        } else {
+          toast({
+            title: "Essa não! Resposta incorreta! 😥",
+            description: "Ainda não foi dessa vez..",
+          });
+        }
+        setIsLoading(false);
+      }, 750);
     }
   };
 
   return (
     <VStack className="w-full p-6 rounded-lg shadow-md">
-      <p className="text-2xl flex text-center justify-center font-bold mb-4">
+      <p className="text-2xl flex text-center justify-center font-medium mb-4">
         {question}
       </p>
       <VStack className="gap-2">
@@ -55,15 +63,13 @@ const Quiz: React.FC<QuizProps> = ({ question, options, correctOption }) => {
           </Question>
         ))}
       </VStack>
-      <HStack className="mt-4">
-        <Button
-          disabled={!selectedOption}
-          className="flex-1"
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
-      </HStack>
+      <Button
+        disabled={!selectedOption}
+        className="flex my-2 w-52 items-center justify-center self-center"
+        onClick={handleSubmit}
+      >
+        {isLoading ? <Spinner /> : "Enviar"}
+      </Button>
       <Toaster />
     </VStack>
   );
