@@ -30,7 +30,9 @@ import { Quiz } from "@/components/ui/quiz";
             className="text-2xl  absolute top-0 md:mt-10 mt-5 w-full text-center"
           >
             <h1 class="font-semibold">Hist | Quiz</h1>
-            <span class="text-lg max-md:hidden">Aprenda história de um jeito descolado!</span>
+            <span class="text-lg max-md:hidden"
+              >Aprenda história de um jeito descolado!</span
+            >
           </VStack>
           <HStack className={`items-center w-4/5 justify-between`}>
             <Image
@@ -39,7 +41,7 @@ import { Quiz } from "@/components/ui/quiz";
               height={500}
               loading="lazy"
               class={"max-lg:hidden max-xl:w-2/4 max-xl:h-2/4"}
-              src={`${import.meta.env.S3_BUCKET}/histquiz-main.svg`}
+              src={`https://histquiz-main.s3.amazonaws.com/histquiz-main.svg`}
             />
             <Quiz client:visible questions={questions} />
           </HStack>
