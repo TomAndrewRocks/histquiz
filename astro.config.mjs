@@ -10,7 +10,5 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
-  image: {
-    remotePatterns: [{ protocol: "https" }],
-  },
+  image: { domains: ["astro.build"], remotePatterns: [{ protocol: "https" }] },
 });
