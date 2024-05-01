@@ -26,4 +26,4 @@ export const questions = [
     ],
     correctOption: "A região está em um conflito duradouro sobre território.",
   },
-];
+]
