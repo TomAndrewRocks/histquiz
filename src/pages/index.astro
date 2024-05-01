@@ -26,9 +26,12 @@ import { Quiz } from "@/components/ui/quiz";
     <div>
       <Center>
         <VStack className="flex items-center justify-center">
-          <h1 class="text-2xl font-semibold absolute top-0 mt-10 w-full">
-            Hist Quiz
-          </h1>
+          <VStack
+            className="text-2xl  absolute top-0 md:mt-10 mt-5 w-full text-center"
+          >
+            <h1 class="font-semibold">Hist | Quiz</h1>
+            <span class="text-lg max-md:hidden">Aprenda história de um jeito descolado!</span>
+          </VStack>
           <HStack className={`items-center w-4/5 justify-between`}>
             <Image
               alt={"main"}
@@ -38,19 +41,15 @@ import { Quiz } from "@/components/ui/quiz";
               class={"max-lg:hidden max-xl:w-2/4 max-xl:h-2/4"}
               src={`${import.meta.env.S3_BUCKET}/histquiz-main.svg`}
             />
-            {
-              questions.map((question) => (
-                <Quiz
-                  client:load
-                  question={question.question}
-                  options={question.options}
-                  correctOption={question.correctOption}
-                />
-              ))
-            }
+            <Quiz client:visible questions={questions} />
           </HStack>
         </VStack>
       </Center>
     </div>
+    <footer
+      class="fixed bottom-0 left-0 right-0 w-full border-t-2 p-4 text-black text-center"
+    >
+      <p>&copy; {new Date().getFullYear()} Tech Praia.</p>
+    </footer>
   </body>
 </html>

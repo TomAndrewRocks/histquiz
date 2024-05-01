@@ -1,21 +1,29 @@
 export const questions = [
   {
-    question: "Qual foi o acontecimento mais marcante do ano de 2020?",
+    question: "O que impactou o mundo em 2020?",
     options: [
       "A pandemia mundial do vírus da Covid-19.",
-      "Donald Trump perde a releição estadunidense.",
+      "Donald Trump perde a re-eleição estadunidense.",
       "Chile enterra constituição ditatorial de Pinochet.",
     ],
     correctOption: "A pandemia mundial do vírus da Covid-19.",
   },
-  // {
-  //   question: "What is 2 + 2?",
-  //   options: ["3", "4", "5", "6"],
-  //   correctOption: "4",
-  // },
-  // {
-  //   question: "Which is the largest planet in our solar system?",
-  //   options: ["Mars", "Jupiter", "Saturn", "Venus"],
-  //   correctOption: "Jupiter",
-  // },
+  {
+    question: "O que foi o Brexit no Reino Unido?",
+    options: [
+      "Novas eleições para concorrer a cadeira de chefe de estado.",
+      "Jogos internos de verão altamente populares no país.",
+      "O levante para a saída do Reino Unido da união européia.",
+    ],
+    correctOption: "O levante para a saída do Reino Unido da união européia.",
+  },
+  {
+    question: "Motivo da guerra no Oriente Médio?",
+    options: [
+      "O fator determinante é a disputa ideológica e religiosa.",
+      "Sempre estiveram em guerra por suprimentos.",
+      "A região está em um conflito duradouro sobre território.",
+    ],
+    correctOption: "A região está em um conflito duradouro sobre território.",
+  },
 ];
