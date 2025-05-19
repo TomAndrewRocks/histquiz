@@ -19,6 +19,7 @@ const Quiz: React.FC<QuizProps> = ({ questions }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [rightAnswers, setRightAnswers] = React.useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false); // Estado para o carregamento da imagem
   const { toast, dismiss } = useToast();
 
   const handleOptionSelect = (option: string) => {
@@ -87,7 +88,7 @@ const Quiz: React.FC<QuizProps> = ({ questions }) => {
                     index={index}
                     key={option}
                     className={`w-full ${
-                      selectedOption == option
+                      selectedOption === option
                         ? "bg-black text-white"
                         : "bg-white text-black"
                     }`}
@@ -111,20 +112,27 @@ const Quiz: React.FC<QuizProps> = ({ questions }) => {
               </Button>
             </React.Fragment>
           ))}
-      {rightAnswers == 3 && (
+
+      {rightAnswers === 3 && (
         <VStack className={"items-center justify-center p-10"}>
-          <h1>Parabéns! 🥳🥳🥳🥳</h1>
+          {!imageLoaded && <span children="loading.." />}
+          {imageLoaded && <h1>Parabéns! 🥳🥳🥳🥳</h1>}
           <img
             loading="eager"
+            onLoad={() => setImageLoaded(true)}
             width={200}
             height={200}
-            src={`https://histquiz-main.s3.amazonaws.com/victory.jpg`}
+            src={`https://img.freepik.com/vetores-gratis/pessoas-comemorando-a-conquista-de-um-gol-e-segurando-um-trofeu_23-2148821967.jpg?t=st=1747681948~exp=1747685548~hmac=2d4d7a56cc11d7a967f62670f2404c9301701af040b9df5d6134327afeeb33ce&w=1380`}
+            alt="Celebration"
           />
-          <Button onClick={() => setRightAnswers(0)}>
-            Deseja jogar novamente?
-          </Button>
+          {imageLoaded && (
+            <Button onClick={() => setRightAnswers(0)}>
+              Deseja jogar novamente?
+            </Button>
+          )}
         </VStack>
       )}
+
       <Toaster />
     </VStack>
   );
